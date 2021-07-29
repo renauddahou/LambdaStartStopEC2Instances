@@ -1,0 +1,38 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowEC2StartStop",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:Start*",
+                "ec2:Stop*"
+            ],
+            "Resource": "arn:aws:ec2:*:*:instance/*",
+            "Condition": {
+                "StringEquals": {
+                    "ec2:ResourceTag/StartStopAllowed": "TRUE"
+                }
+            }
+        },
+        {
+            "Sid": "AllowDescribeAndReport",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:DescribeInstances",
+                "ec2:ReportInstanceStatus"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "AllowLoggingToCloudwatchLogs",
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogStream",
+                "logs:CreateLogGroup",
+                "logs:PutLogEvents"
+            ],
+            "Resource": "arn:aws:logs:*:*:*"
+        }
+    ]
+}
